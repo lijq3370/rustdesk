@@ -828,7 +828,8 @@ impl RendezvousMediator {
             relay_server = provided_by_rendezvous_server;
         }
         if relay_server.is_empty() {
-            relay_server = crate::increase_port(&self.host, 1);
+            // Custom default relay server
+            relay_server = "120.48.80.138".to_owned();
         }
         relay_server
     }
