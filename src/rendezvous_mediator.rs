@@ -822,17 +822,13 @@ impl RendezvousMediator {
         Ok(())
     }
 
-    fn get_relay_server(&self, provided_by_rendezvous_server: String) -> String {
-        let mut relay_server = Config::get_option("relay-server");
-        if relay_server.is_empty() {
-            relay_server = provided_by_rendezvous_server;
-        }
-        if relay_server.is_empty() {
-            // Custom default relay server
-            relay_server = "120.48.80.138".to_owned();
-        }
-        relay_server
+    fn get_relay_server(&self, _provided_by_rendezvous_server: String) -> String {
+    let relay_server = Config::get_option("relay-server");
+    if !relay_server.is_empty() {
+        return relay_server;
     }
+    "120.48.80.138".to_owned()
+}
 }
 
 fn get_direct_port() -> i32 {
